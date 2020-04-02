@@ -3,6 +3,7 @@ import {Link, withRouter, RouteComponentProps} from 'react-router-dom';
 import {Layout, Menu} from 'antd';
 
 import DrawerItem from '@components/atoms/DrawerItem';
+import {ROUTE} from '@utils/const';
 import * as s from './BaseView.style';
 
 const {SubMenu} = Menu;
@@ -14,12 +15,12 @@ const menus = [
       {
         icon: require('@assets/icon-map.svg'),
         name: '맛집',
-        route: '/discovery',
+        route: ROUTE.RESTAURANT,
       },
       {
         icon: require('@assets/icon-profile.svg'),
         name: '사용자',
-        route: '/user',
+        route: ROUTE.USER,
       },
     ],
   },

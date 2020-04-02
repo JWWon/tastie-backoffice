@@ -39,9 +39,6 @@ export const DrawerMenu = styled(Menu).attrs({
     h3 {
       color: ${({theme}) => theme.color.blue};
     }
-    img {
-      fill: ${({theme}) => theme.color.blue};
-    }
   }
 `;
 

@@ -13,6 +13,8 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "antd": "^4.1.0",
+    "env-cmd": "^10.1.0",
+    "google-map-react": "^1.1.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
@@ -21,9 +23,9 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "env-cmd -f .env craco start",
+    "build": "env-cmd -f .env craco build",
+    "test": "env-cmd -f .env craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/google-map-react": "^1.1.5",
     "@types/react-router-dom": "^5.1.3",
     "@types/styled-components": "^5.0.1",
     "craco-alias": "^2.1.1"

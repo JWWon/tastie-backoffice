@@ -8,7 +8,7 @@ const SideBar: React.FC<Props> = ({headerComponent, bodyComponent}) => (
     <s.HeaderArea>
       <s.Header>{headerComponent}</s.Header>
     </s.HeaderArea>
-    <s.BodyArea>{bodyComponent}</s.BodyArea>
+    <s.Body>{bodyComponent}</s.Body>
   </s.Container>
 );
 

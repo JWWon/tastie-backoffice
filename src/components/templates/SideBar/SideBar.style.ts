@@ -12,11 +12,11 @@ export const Container = styled.div`
 
 export const HeaderArea = styled.div`
   height: ${({theme}) => theme.size.header}px;
-  padding: 0.75rem 0;
+  padding: ${({theme}) => theme.space.rem.narrow}rem 0;
 `;
 
 const floatStyle = css`
-  background: ${({theme}) => theme.color.white};
+  background: ${({theme}) => theme.color.white.default};
   border: 1px solid ${({theme}) => theme.color.gray.light};
   border-radius: 0.25rem;
   box-shadow: 0px 2px 4px 2px ${({theme}) => theme.color.black.dim};
@@ -24,10 +24,11 @@ const floatStyle = css`
 
 export const Header = styled.div`
   flex: 1;
+  padding: 0 ${({theme}) => theme.space.rem.normal}rem;
   ${floatStyle}
 `;
 
-export const BodyArea = styled.div`
+export const Body = styled.div`
   flex: 1;
   margin-bottom: 1rem;
   ${floatStyle}

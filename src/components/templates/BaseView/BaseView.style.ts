@@ -12,7 +12,7 @@ export const DrawerBar = styled(Layout.Sider).attrs({
   collapsedWidth: 80,
 })`
   flex: 1;
-  background: ${({theme}) => theme.color.white};
+  background: ${({theme}) => theme.color.white.default};
 `;
 
 export const LogoWrapper = styled.div`

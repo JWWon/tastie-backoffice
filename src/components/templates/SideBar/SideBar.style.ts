@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
@@ -15,17 +15,20 @@ export const HeaderArea = styled.div`
   padding: 0.75rem 0;
 `;
 
-export const Header = styled.div`
-  flex: 1;
+const floatStyle = css`
   background: ${({theme}) => theme.color.white};
   border: 1px solid ${({theme}) => theme.color.gray.light};
   border-radius: 0.25rem;
+  box-shadow: 0px 2px 4px 2px ${({theme}) => theme.color.black.dim};
 `;
 
-export const ContentWrapper = styled.div`
+export const Header = styled.div`
+  flex: 1;
+  ${floatStyle}
+`;
+
+export const BodyArea = styled.div`
   flex: 1;
   margin-bottom: 1rem;
-  background: ${({theme}) => theme.color.white};
-  border: 1px solid ${({theme}) => theme.color.gray.light};
-  border-radius: 0.25rem;
+  ${floatStyle}
 `;

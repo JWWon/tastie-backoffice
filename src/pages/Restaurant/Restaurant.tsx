@@ -3,6 +3,7 @@ import GoogleMap from 'google-map-react';
 
 import * as s from './Restaurant.style';
 import SideBar from '@components/templates/SideBar';
+import SearchInput from '@components/atoms/SearchInput';
 
 const key = process.env.REACT_APP_GCP_API_KEY;
 const initCenter = {
@@ -12,7 +13,10 @@ const initCenter = {
 
 const Restaurant: React.FC = () => (
   <s.Container>
-    <SideBar></SideBar>
+    <SideBar
+      headerComponent={<SearchInput placeholder="맛집 검색하기" />}
+      bodyComponent={null}
+    />
     {key ? (
       <GoogleMap
         bootstrapURLKeys={{key}}

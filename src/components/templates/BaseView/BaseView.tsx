@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {Link, withRouter, RouteComponentProps} from 'react-router-dom';
 import {Layout, Menu} from 'antd';
@@ -27,24 +28,28 @@ const menus = [
   {title: '사용자 이벤트', items: []},
   {title: '알림', items: []},
 ];
+const items = menus.map(menu => menu.items).flat();
 
 const BaseView: React.FC<RouteComponentProps> = ({children, history}) => {
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([
-    menus[0].items[0].name,
-  ]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+
+  function handleSelectKey(pathname: string) {
+    for (const item of items) {
+      if (item.route === pathname) {
+        setSelectedKeys([item.name]);
+        break;
+      }
+    }
+  }
 
   useEffect(() => {
-    const unlisten = history.listen(location => {
-      const items = menus.map(menu => menu.items).flat();
-      for (const item of items) {
-        if (item.route === location.pathname) {
-          setSelectedKeys([item.name]);
-          break;
-        }
-      }
-    });
+    handleSelectKey(window.location.pathname);
+
+    const unlisten = history.listen(location =>
+      handleSelectKey(location.pathname),
+    );
     return unlisten;
-  }, [history]);
+  }, []);
 
   return (
     <s.Container>

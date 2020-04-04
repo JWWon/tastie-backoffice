@@ -25,7 +25,7 @@ export const Container = styled.div`
 `;
 
 // text
-export const MenuName = styled.h5<MenuProps>`
+export const MenuName = styled.h4<MenuProps>`
   color: ${({disabled, theme}) =>
     disabled ? theme.color.gray.light : theme.color.black.default};
 `;

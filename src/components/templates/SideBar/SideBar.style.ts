@@ -1,5 +1,12 @@
 import styled, {css} from 'styled-components';
 
+import {hover} from '@styles/mixins';
+
+interface MenuProps {
+  disabled?: boolean;
+}
+
+// div
 export const Container = styled.div`
   position: absolute;
   z-index: 999;
@@ -32,4 +39,26 @@ export const Body = styled.div`
   flex: 1;
   margin-bottom: 1rem;
   ${floatStyle}
+`;
+
+const menuWidth = 6;
+export const BodyMenu = styled.div`
+  position: absolute;
+  top: ${({theme}) => theme.size.header}px;
+  right: -${({theme}) => menuWidth + theme.space.rem.narrow}rem;
+  width: ${menuWidth}rem;
+  ${floatStyle}
+`;
+
+export const MenuItem = styled.div<MenuProps>`
+  padding: ${({theme}) => theme.space.rem.narrow}rem 0;
+  text-align: center;
+  ${({disabled}) => (disabled ? '' : hover)}
+`;
+
+// text
+
+export const MenuName = styled.h5<MenuProps>`
+  ${({disabled, theme}) =>
+    disabled ? `color: ${theme.color.gray.light};` : ''}
 `;

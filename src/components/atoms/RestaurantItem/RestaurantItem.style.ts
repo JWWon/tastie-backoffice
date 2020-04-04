@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import {Restaurant} from '@model';
+import {hover} from '@styles/mixins';
 
 // div
 export const Wrapper = styled.div`
@@ -8,11 +9,7 @@ export const Wrapper = styled.div`
   width: 100%;
   padding: ${({theme}) =>
     `${theme.space.rem.normal / 2}rem ${theme.space.rem.normal}rem`};
-
-  &:hover {
-    cursor: pointer;
-    background: ${({theme}) => theme.color.white.dark};
-  }
+  ${hover}
 `;
 
 export const Content = styled.div`

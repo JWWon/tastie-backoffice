@@ -1,7 +1,9 @@
-import {all} from 'redux-saga/effects';
+import {all, fork} from 'redux-saga/effects';
+
+import restaurantsRoot from './restaurants';
 
 function* rootSaga() {
-  yield all([]);
+  yield all([fork(restaurantsRoot)]);
 }
 
 export default rootSaga;

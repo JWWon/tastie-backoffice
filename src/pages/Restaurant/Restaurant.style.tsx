@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import RawList, {ListProps} from 'antd/lib/list';
 
-import {Restaurant} from '@model';
+import {RestaurantShort} from '@model';
 
 export const Container = styled.div`
   position: relative;
@@ -11,17 +11,18 @@ export const Container = styled.div`
 `;
 
 // custom
-export const List = styled(({pagination, ...props}: ListProps<Restaurant>) => (
-  <RawList
-    {...props}
-    itemLayout="vertical"
-    pagination={{
-      ...pagination,
-      size: 'small',
-      pageSize: 12,
-      simple: true,
-    }}
-  />
-))`
+export const List = styled(
+  ({pagination, ...props}: ListProps<RestaurantShort>) => (
+    <RawList
+      {...props}
+      itemLayout="vertical"
+      pagination={{
+        ...pagination,
+        size: 'small',
+        simple: true,
+      }}
+    />
+  ),
+)`
   flex: 1;
 `;

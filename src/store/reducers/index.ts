@@ -1,7 +1,9 @@
 import {combineReducers} from 'redux';
 import {StateType} from 'typesafe-actions';
 
-const rootReducer = combineReducers({});
+import restaurants from './restaurants';
+
+const rootReducer = combineReducers({restaurants});
 
 export default rootReducer;
 

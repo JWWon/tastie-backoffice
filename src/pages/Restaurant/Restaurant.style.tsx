@@ -18,7 +18,7 @@ export const List = styled(({pagination, ...props}: ListProps<Restaurant>) => (
     pagination={{
       ...pagination,
       size: 'small',
-      pageSize: 13,
+      pageSize: 12,
       simple: true,
     }}
   />

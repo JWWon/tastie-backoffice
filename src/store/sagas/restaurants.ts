@@ -14,8 +14,8 @@ function* getRestaurantsSaga() {
       address: '서울특별시 이태원로 22 국방부 4274부대',
       categories: ['코로나19', '자가격리', '방콕중'],
       coordinate: {
-        latitude: 37.555693 + Math.random() * 0.04 - 0.02,
-        longitude: 126.936632 + Math.random() * 0.04 - 0.02,
+        latitude: 37.555693 + Math.random() * 0.02 - 0.01,
+        longitude: 126.936632 + Math.random() * 0.02 - 0.01,
       },
     }));
 

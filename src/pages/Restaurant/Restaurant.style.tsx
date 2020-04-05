@@ -10,6 +10,10 @@ export const Container = styled.div`
   height: 100%;
 `;
 
+export const GoogleMap = styled.div`
+  flex: 1;
+`;
+
 // custom
 export const List = styled(
   ({pagination, ...props}: ListProps<RestaurantShort>) => (

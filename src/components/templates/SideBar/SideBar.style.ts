@@ -1,9 +1,5 @@
 import styled, {css} from 'styled-components';
 
-interface MenuProps {
-  disabled?: boolean;
-}
-
 // div
 export const Container = styled.div`
   position: absolute;

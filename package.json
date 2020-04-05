@@ -14,7 +14,6 @@
     "@types/react-dom": "^16.9.0",
     "antd": "^4.1.0",
     "env-cmd": "^10.1.0",
-    "google-map-react": "^1.1.7",
     "immer": "^6.0.3",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
@@ -52,7 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@types/google-map-react": "^1.1.5",
+    "@types/googlemaps": "^3.39.3",
     "@types/lodash": "^4.14.149",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.3",

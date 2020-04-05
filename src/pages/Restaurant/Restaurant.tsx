@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import GoogleMap from 'google-map-react';
+import _ from 'lodash';
 
+import {RestaurantShort} from '@model';
 import {RootState} from '@store/reducers';
 import {getRestaurants, setCurrentRange} from '@store/actions/restaurants';
 import SideBar from '@components/templates/SideBar';
@@ -11,14 +12,10 @@ import RestaurantItem from '@components/atoms/RestaurantItem';
 import ListHeader from '@components/atoms/ListHeader';
 import {Item} from '@components/atoms/ListHeader/ListHeader.type';
 import * as s from './Restaurant.style';
-
-const key = process.env.REACT_APP_GCP_API_KEY;
+import Marker from '@components/atoms/Marker';
+import GoogleMap from '@components/atoms/GoogleMap';
 
 const pageSize = 12;
-const initCenter = {
-  lat: 37.555693,
-  lng: 126.936632,
-};
 const menuItems: Item[] = [
   {key: 'create', name: '신규 등록'},
   {key: 'selectAll', name: '전체 선택'},
@@ -27,13 +24,29 @@ const menuItems: Item[] = [
 ];
 
 const Restaurant: React.FC = () => {
+  // useRef
+  const mapComponentRef = useRef() as React.RefObject<GoogleMap>;
+  const mapRef = useRef<google.maps.Map<HTMLDivElement>>();
+  // useState
+  const [currentData, setCurrentData] = useState<RestaurantShort[]>([]);
+  // useDispatch
   const dispatch = useDispatch();
-  const {data} = useSelector((state: RootState) => state.restaurants);
+  // useSelector
+  const {data, currentRange} = useSelector(
+    (state: RootState) => state.restaurants,
+  );
+
   const total = data.length;
 
   useEffect(() => {
     dispatch(getRestaurants.request());
   }, []);
+
+  useEffect(() => {
+    const nextData = _.slice(data, currentRange[0], currentRange[1] + 1);
+    setCurrentData(nextData);
+    mapComponentRef.current?.fitBounds(nextData);
+  }, [data.length, currentRange[0]]);
 
   return (
     <s.Container>
@@ -52,17 +65,20 @@ const Restaurant: React.FC = () => {
           />
         }
       />
-      {key ? (
-        <GoogleMap
-          bootstrapURLKeys={{key}}
-          defaultCenter={initCenter}
-          defaultZoom={17}
-          options={{
-            fullscreenControl: false,
-            zoomControl: false,
-            streetViewControl: true,
-          }}></GoogleMap>
-      ) : null}
+      <GoogleMap
+        ref={mapComponentRef}
+        mapDidMount={map => (mapRef.current = map)}>
+        {currentData.map(
+          item =>
+            mapRef.current && (
+              <Marker
+                key={item.id}
+                map={mapRef.current}
+                {..._.pick(item, ['id', 'status', 'name', 'coordinate'])}
+              />
+            ),
+        )}
+      </GoogleMap>
     </s.Container>
   );
 };

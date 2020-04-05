@@ -4,11 +4,16 @@ import {Restaurant} from '@model';
 import {hover} from '@styles/mixins';
 
 // div
-export const Wrapper = styled.div`
+interface WrapperProps {
+  selected: boolean;
+}
+export const Wrapper = styled.div<WrapperProps>`
   flex-direction: row;
   width: 100%;
   padding: ${({theme}) =>
     `${theme.space.rem.normal / 2}rem ${theme.space.rem.normal}rem`};
+  ${({selected, theme}) =>
+    selected ? `background: ${theme.color.white.dark};` : ''}
   ${hover}
 `;
 

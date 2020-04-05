@@ -9,6 +9,7 @@ export default {
   },
   gray: {
     light: '#DBDBDB' as const,
+    dark: '#545454' as const,
   },
   blue: '#1972F8' as const,
   green: '#16FF54' as const,

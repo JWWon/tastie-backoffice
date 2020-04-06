@@ -1,13 +1,13 @@
 import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 
-import {Props} from './SearchInput.type';
+import {Data, Props} from './SearchInput.type';
 import * as s from './SearchInput.style';
 
 const SearchInput: React.FC<Props> = ({placeholder}) => {
-  const {handleSubmit, control} = useForm();
+  const {handleSubmit, control} = useForm<Data>();
 
-  function onSubmit(data: any) {
+  function onSubmit(data: Data) {
     console.log(data);
   }
 

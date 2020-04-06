@@ -5,7 +5,7 @@ import {Layout, Menu} from 'antd';
 
 import DrawerItem from '@components/atoms/DrawerItem';
 import {ROUTE} from '@utils/const';
-import * as s from './BaseView.style';
+import * as s from './BaseContainer.style';
 
 const {SubMenu} = Menu;
 
@@ -16,7 +16,7 @@ const menus = [
       {
         icon: require('@assets/icon-map.svg'),
         name: '맛집',
-        route: ROUTE.RESTAURANT,
+        route: ROUTE.RESTAURANTS,
       },
       {
         icon: require('@assets/icon-profile.svg'),
@@ -30,7 +30,7 @@ const menus = [
 ];
 const items = menus.map(menu => menu.items).flat();
 
-const BaseView: React.FC<RouteComponentProps> = ({children, history}) => {
+const BaseContainer: React.FC<RouteComponentProps> = ({children, history}) => {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   function handleSelectKey(pathname: string) {
@@ -84,4 +84,4 @@ const BaseView: React.FC<RouteComponentProps> = ({children, history}) => {
   );
 };
 
-export default withRouter(BaseView);
+export default withRouter(BaseContainer);

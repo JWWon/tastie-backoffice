@@ -8,6 +8,7 @@ import {
   clearCurrentId,
   getRestaurant,
 } from '@store/actions/restaurants';
+import Status from '@components/atoms/Status';
 import * as s from './RestaurantItem.style';
 
 const RestaurantItem: React.FC<RestaurantShort> = data => {
@@ -40,7 +41,7 @@ const RestaurantItem: React.FC<RestaurantShort> = data => {
       <s.Thumbnail src={data.photoUrl} />
       <s.Content>
         <s.ContentRow>
-          <s.Status status={data.status} />
+          <Status status={data.status} />
           <s.Name>{data.name}</s.Name>
         </s.ContentRow>
         <s.Info>{data.address}</s.Info>

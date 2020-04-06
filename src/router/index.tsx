@@ -1,23 +1,23 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import BaseView from '@components/templates/BaseView';
+import BaseContainer from '@components/templates/BaseContainer';
 import {ROUTE} from '@utils/const';
-import Restaurant from '@pages/Restaurant';
+import Restaurants from '@pages/Restaurants';
 import User from '@pages/User';
 
 const Router: React.FC = () => (
   <BrowserRouter>
-    <BaseView>
+    <BaseContainer>
       <Switch>
-        <Route path={ROUTE.RESTAURANT}>
-          <Restaurant />
+        <Route path={ROUTE.RESTAURANTS}>
+          <Restaurants />
         </Route>
         <Route path={ROUTE.USER}>
           <User />
         </Route>
       </Switch>
-    </BaseView>
+    </BaseContainer>
   </BrowserRouter>
 );
 

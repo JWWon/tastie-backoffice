@@ -1,4 +1,8 @@
 export const ROUTE = {
-  RESTAURANT: '/restaurant',
+  RESTAURANTS: '/restaurants',
   USER: '/user',
+};
+
+export const ID = {
+  SIDEBAR: 'sidebar',
 };

@@ -44,11 +44,11 @@ function* getRestaurantSaga() {
       categories: ['코로나19', '자가격리', '방콕중'],
       keywords: [
         {
-          title: '인기 토픽',
+          title: 'popular_topic',
           tags: ['출타 제한', '맥도날드 신메뉴', '배고프다'],
         },
         {
-          title: '분위기',
+          title: 'atmosphere',
           tags: ['우울한', '사진찍기 좋은'],
         },
       ],

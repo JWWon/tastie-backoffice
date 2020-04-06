@@ -8,12 +8,13 @@ import {RootState} from '@store/reducers';
 import {getRestaurants, setCurrentRange} from '@store/actions/restaurants';
 import SideBar from '@components/templates/SideBar';
 import SearchInput from '@components/atoms/SearchInput';
-import RestaurantItem from '@components/atoms/RestaurantItem';
+import RestaurantItem from '@components/molcules/RestaurantItem';
 import ListHeader from '@components/atoms/ListHeader';
 import {Item} from '@components/atoms/ListHeader/ListHeader.type';
-import * as s from './Restaurant.style';
+import * as s from './Restaurants.style';
 import Marker from '@components/atoms/Marker';
 import GoogleMap from '@components/atoms/GoogleMap';
+import RestaurantEditor from '@components/organisms/RestaurantEditor';
 
 const pageSize = 12;
 const menuItems: Item[] = [
@@ -23,7 +24,7 @@ const menuItems: Item[] = [
   {key: 'reject', name: '등록 취소', disabled: true},
 ];
 
-const Restaurant: React.FC = () => {
+const Restaurants: React.FC = () => {
   // useRef
   const mapComponentRef = useRef() as React.RefObject<GoogleMap>;
   const mapRef = useRef<google.maps.Map<HTMLDivElement>>();
@@ -79,8 +80,9 @@ const Restaurant: React.FC = () => {
             ),
         )}
       </GoogleMap>
+      <RestaurantEditor />
     </s.Container>
   );
 };
 
-export default Restaurant;
+export default Restaurants;

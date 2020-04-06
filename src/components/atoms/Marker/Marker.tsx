@@ -2,7 +2,11 @@
 import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {setCurrentId, clearCurrentId} from '@store/actions/restaurants';
+import {
+  setCurrentId,
+  clearCurrentId,
+  getRestaurant,
+} from '@store/actions/restaurants';
 import {RootState} from '@store/reducers';
 import markerCurrent from '@assets/icon-marker-current.svg';
 import {Props} from './Marker.type';
@@ -52,7 +56,9 @@ const Marker: React.FC<Props> = ({id, status, name, coordinate, ...props}) => {
   }
 
   // EVENTS
-  function handleClick() {}
+  function handleClick() {
+    dispatch(getRestaurant.request());
+  }
 
   function handleMouseOver() {
     dispatch(setCurrentId(id));

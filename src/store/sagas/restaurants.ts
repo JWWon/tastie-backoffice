@@ -1,8 +1,9 @@
-import {put, takeEvery} from 'redux-saga/effects';
-import {getRestaurants} from '@store/actions/restaurants';
+import {put, takeEvery, select} from 'redux-saga/effects';
+import {getRestaurants, getRestaurant} from '@store/actions/restaurants';
 import _ from 'lodash';
 
-import {RestaurantShort} from '@model';
+import {RestaurantShort, Restaurant} from '@model';
+import {RootState} from '@store/reducers';
 
 function* getRestaurantsSaga() {
   try {
@@ -25,6 +26,76 @@ function* getRestaurantsSaga() {
   }
 }
 
+function* getRestaurantSaga() {
+  try {
+    const {currentId}: RootState['restaurants'] = yield select(
+      (state: RootState) => state.restaurants,
+    );
+    if (!currentId) throw new Error('No currentId on state.restaurants');
+
+    const dummyData: Restaurant = {
+      id: currentId,
+      photoUrls: _.range(Math.floor(Math.random() * 9) + 1).map(
+        () => 'https://picsum.photos/200',
+      ),
+      status: Math.random() < 0.5 ? 'ACTIVE' : 'WAITING_FOR_REVIEW',
+      name: '맛집 샘플',
+      address: '서울특별시 이태원로 22 국방부 4274부대',
+      categories: ['코로나19', '자가격리', '방콕중'],
+      keywords: [
+        {
+          title: '인기 토픽',
+          tags: ['출타 제한', '맥도날드 신메뉴', '배고프다'],
+        },
+        {
+          title: '분위기',
+          tags: ['우울한', '사진찍기 좋은'],
+        },
+      ],
+      menus: [
+        {
+          popular: false,
+          name: 'Menu 1',
+          price: 15000,
+          currency: 'KRW',
+        },
+      ],
+      telephone: '010-1111-2222',
+      opening_hours: [
+        {
+          range: 'WEEKDAY',
+          type: 'OPEN',
+          time: {
+            start: '08:00',
+            end: '21:00',
+          },
+        },
+        {
+          range: 'WEEKEND',
+          type: 'OPEN',
+          time: {
+            start: '09:00',
+            end: '23:00',
+          },
+          breakTime: {
+            start: '13:00',
+            end: '14:00',
+          },
+        },
+      ],
+      coordinate: {
+        latitude: 37.555693 + Math.random() * 0.02 - 0.01,
+        longitude: 126.936632 + Math.random() * 0.02 - 0.01,
+      },
+    };
+
+    yield put(getRestaurant.success(dummyData));
+  } catch (e) {
+    yield put(getRestaurant.failure());
+  }
+}
+
 export default function*() {
   yield takeEvery(getRestaurants.request, getRestaurantsSaga);
+  yield takeEvery(getRestaurant.request, getRestaurantSaga);
 }

@@ -7,12 +7,16 @@ import {
   setCurrentId,
   clearCurrentId,
   setCurrentRange,
+  getRestaurant,
+  clearRestaurant,
 } from '@store/actions/restaurants';
-import {RestaurantShort} from '@model';
+import {RestaurantShort, Restaurant} from '@model';
 
 interface RestaurantsState {
   data: RestaurantShort[];
   currentRange: [number, number];
+  // item
+  currentItem?: Restaurant;
   // id
   selectedIds: string[];
   currentId?: string;
@@ -34,6 +38,11 @@ const restaruantsReducer = createReducer<RestaurantsState, RestaurantsAction>(
       draft.data = action.payload;
     }),
   )
+  .handleAction(getRestaurant.success, (state, action) =>
+    produce(state, draft => {
+      draft.currentItem = action.payload;
+    }),
+  )
   .handleAction(setCurrentId, (state, action) =>
     produce(state, draft => {
       draft.currentId = action.payload;
@@ -51,6 +60,12 @@ const restaruantsReducer = createReducer<RestaurantsState, RestaurantsAction>(
         (page - 1) * pageSize,
         Math.min(page * pageSize, state.data.length) - 1,
       ];
+    }),
+  )
+  .handleAction(clearRestaurant, state =>
+    produce(state, draft => {
+      delete draft.currentItem;
+      delete draft.currentId;
     }),
   );
 

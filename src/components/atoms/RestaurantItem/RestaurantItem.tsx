@@ -3,7 +3,11 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {RestaurantShort} from '@model';
 import {RootState} from '@store/reducers';
-import {setCurrentId, clearCurrentId} from '@store/actions/restaurants';
+import {
+  setCurrentId,
+  clearCurrentId,
+  getRestaurant,
+} from '@store/actions/restaurants';
 import * as s from './RestaurantItem.style';
 
 const RestaurantItem: React.FC<RestaurantShort> = data => {
@@ -19,6 +23,10 @@ const RestaurantItem: React.FC<RestaurantShort> = data => {
     dispatch(clearCurrentId());
   }
 
+  function handleClick() {
+    dispatch(getRestaurant.request());
+  }
+
   useEffect(() => {
     setSelected(data.id === currentId);
   }, [data.id, currentId]);
@@ -27,6 +35,7 @@ const RestaurantItem: React.FC<RestaurantShort> = data => {
     <s.Wrapper
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       selected={selected}>
       <s.Thumbnail src={data.photoUrl} />
       <s.Content>

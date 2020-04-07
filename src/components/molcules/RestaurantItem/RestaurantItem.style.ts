@@ -36,7 +36,7 @@ export const Status = styled.div<Pick<Restaurant, 'status'>>`
     status === 'ACTIVE'
       ? theme.color.green
       : status === 'WAITING_FOR_REVIEW'
-      ? theme.color.yellow
+      ? theme.color.orange
       : theme.color.red};
 `;
 

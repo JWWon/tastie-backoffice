@@ -12,9 +12,6 @@ export const Container = styled.div`
   right: ${({theme}) => theme.space.rem.normal}rem;
   left: ${({theme}) => sideBarWidth || theme.size.sidebar.width}px;
   margin-left: ${({theme}) => theme.space.rem.normal * 2}rem;
+
   ${floatBox}
 `;
-
-/* margin: ${({theme}) =>
-    `${theme.size.header}px ${theme.space.rem.normal}rem 0`};
-  flex: 1; */

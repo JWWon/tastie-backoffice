@@ -1,5 +1,31 @@
 import styled from 'styled-components';
+import {Button as RawButton} from 'antd';
 
-export const Container = styled.div`
-  flex: 1;
+import RawStatus from '@components/atoms/Status';
+
+// div
+export const Header = styled.div`
+  padding: ${({theme}) => theme.space.rem.normal}rem;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const AlignRight = styled.div`
+  margin-left: auto;
+  flex-direction: row;
+`;
+
+// text
+export const Name = styled.h2`
+  margin-left: ${({theme}) => theme.space.rem.normal}rem;
+  font-weight: 600;
+`;
+
+// custom
+export const Status = styled(RawStatus)`
+  margin-left: ${({theme}) => theme.space.rem.narrow}rem;
+`;
+
+export const Button = styled(RawButton)`
+  margin-left: ${({theme}) => theme.space.rem.narrow}rem;
 `;

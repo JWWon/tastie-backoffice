@@ -58,19 +58,19 @@ const Restaurants: React.FC = () => {
             pagination={{
               total,
               pageSize,
-              onChange: page => dispatch(setCurrentRange({page, pageSize})),
+              onChange: (page) => dispatch(setCurrentRange({page, pageSize})),
             }}
             header={<ListHeader total={total} items={menuItems} />}
             dataSource={data}
-            renderItem={item => <RestaurantItem {...item} />}
+            renderItem={(item) => <RestaurantItem {...item} />}
           />
         }
       />
       <GoogleMap
         ref={mapComponentRef}
-        mapDidMount={map => (mapRef.current = map)}>
+        mapDidMount={(map) => (mapRef.current = map)}>
         {currentData.map(
-          item =>
+          (item) =>
             mapRef.current && (
               <Marker
                 key={item.id}

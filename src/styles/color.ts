@@ -14,5 +14,5 @@ export default {
   blue: '#1972F8' as const,
   green: '#16FF54' as const,
   red: '#FB5454' as const,
-  yellow: '#FFF700' as const,
+  orange: '#FFB300' as const,
 };

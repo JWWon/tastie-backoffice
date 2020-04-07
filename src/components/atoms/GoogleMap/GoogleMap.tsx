@@ -12,7 +12,7 @@ class GoogleMap extends React.PureComponent<Props> {
 
   public fitBounds = (data: Item[]) => {
     const bounds = new window.google.maps.LatLngBounds();
-    data.forEach(item => {
+    data.forEach((item) => {
       bounds.extend({
         lat: item.coordinate.latitude,
         lng: item.coordinate.longitude,

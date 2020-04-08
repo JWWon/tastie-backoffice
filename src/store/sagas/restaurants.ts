@@ -7,7 +7,7 @@ import {RootState} from '@store/reducers';
 
 function* getRestaurantsSaga() {
   try {
-    const dummyData: RestaurantShort[] = _.range(1000).map(idx => ({
+    const dummyData: RestaurantShort[] = _.range(1000).map((idx) => ({
       id: idx.toString(),
       photoUrl: 'https://picsum.photos/200',
       status: Math.random() < 0.5 ? 'ACTIVE' : 'WAITING_FOR_REVIEW',
@@ -26,22 +26,21 @@ function* getRestaurantsSaga() {
   }
 }
 
-function* getRestaurantSaga() {
+function* getRestaurantSaga(action: ReturnType<typeof getRestaurant.request>) {
   try {
-    const {currentId}: RootState['restaurants'] = yield select(
+    const id = action.payload;
+
+    // TODO: Get real restaurant data from backend
+    const {data}: RootState['restaurants'] = yield select(
       (state: RootState) => state.restaurants,
     );
-    if (!currentId) throw new Error('No currentId on state.restaurants');
+    const item = data[_.findIndex(data, (item) => item.id === id)];
 
     const dummyData: Restaurant = {
-      id: currentId,
-      photoUrls: _.range(Math.floor(Math.random() * 9) + 1).map(
+      ..._.omit(item, ['photoUrl']),
+      photoUrls: _.range(Math.floor(Math.random() * 5) + 5).map(
         () => 'https://picsum.photos/200',
       ),
-      status: Math.random() < 0.5 ? 'ACTIVE' : 'WAITING_FOR_REVIEW',
-      name: '맛집 샘플',
-      address: '서울특별시 이태원로 22 국방부 4274부대',
-      categories: ['코로나19', '자가격리', '방콕중'],
       keywords: [
         {
           title: 'popular_topic',
@@ -83,10 +82,6 @@ function* getRestaurantSaga() {
           },
         },
       ],
-      coordinate: {
-        latitude: 37.555693 + Math.random() * 0.02 - 0.01,
-        longitude: 126.936632 + Math.random() * 0.02 - 0.01,
-      },
     };
 
     yield put(getRestaurant.success(dummyData));
@@ -95,7 +90,7 @@ function* getRestaurantSaga() {
   }
 }
 
-export default function*() {
+export default function* () {
   yield takeEvery(getRestaurants.request, getRestaurantsSaga);
   yield takeEvery(getRestaurant.request, getRestaurantSaga);
 }

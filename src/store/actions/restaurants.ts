@@ -23,7 +23,7 @@ export const getRestaurant = createAsyncAction(
   GET_RESTAURANT_REQUEST,
   GET_RESTAURANT_SUCCESS,
   GET_RESTAURANT_FAILURE,
-)<undefined, Restaurant, undefined>();
+)<string, Restaurant, undefined>();
 // END GET_RESTAURANT
 
 // SET_CURRENT_ID

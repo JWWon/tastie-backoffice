@@ -13,7 +13,7 @@ import {Props} from './Marker.type';
 
 const Marker: React.FC<Props> = ({id, status, name, coordinate, ...props}) => {
   const dispatch = useDispatch();
-  const {currentId} = useSelector((state: RootState) => state.restaurants);
+  const {hoverId} = useSelector((state: RootState) => state.restaurants);
   const markerRef = useRef<google.maps.Marker>();
   const infoRef = useRef<google.maps.InfoWindow>();
 
@@ -57,7 +57,7 @@ const Marker: React.FC<Props> = ({id, status, name, coordinate, ...props}) => {
 
   // EVENTS
   function handleClick() {
-    dispatch(getRestaurant.request());
+    dispatch(getRestaurant.request(id));
   }
 
   function handleMouseOver() {
@@ -88,13 +88,13 @@ const Marker: React.FC<Props> = ({id, status, name, coordinate, ...props}) => {
   }, []);
 
   useEffect(() => {
-    if (currentId === id) highlight();
+    if (hoverId === id) highlight();
     else if (
       (markerRef.current?.getIcon() as google.maps.ReadonlyIcon).url ===
       markerCurrent
     )
       rollback();
-  }, [currentId]);
+  }, [hoverId]);
 
   return null;
 };

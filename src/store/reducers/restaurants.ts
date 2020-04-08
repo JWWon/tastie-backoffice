@@ -19,7 +19,7 @@ interface RestaurantsState {
   currentItem?: Restaurant;
   // id
   selectedIds: string[];
-  currentId?: string;
+  hoverId?: string;
   // others
   error?: any;
 }
@@ -34,27 +34,27 @@ const restaruantsReducer = createReducer<RestaurantsState, RestaurantsAction>(
   initState,
 )
   .handleAction(getRestaurants.success, (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.data = action.payload;
     }),
   )
   .handleAction(getRestaurant.success, (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       draft.currentItem = action.payload;
     }),
   )
   .handleAction(setCurrentId, (state, action) =>
-    produce(state, draft => {
-      draft.currentId = action.payload;
+    produce(state, (draft) => {
+      draft.hoverId = action.payload;
     }),
   )
-  .handleAction(clearCurrentId, state =>
-    produce(state, draft => {
-      delete draft.currentId;
+  .handleAction(clearCurrentId, (state) =>
+    produce(state, (draft) => {
+      delete draft.hoverId;
     }),
   )
   .handleAction(setCurrentRange, (state, action) =>
-    produce(state, draft => {
+    produce(state, (draft) => {
       const {page, pageSize} = action.payload;
       draft.currentRange = [
         (page - 1) * pageSize,
@@ -62,10 +62,10 @@ const restaruantsReducer = createReducer<RestaurantsState, RestaurantsAction>(
       ];
     }),
   )
-  .handleAction(clearRestaurant, state =>
-    produce(state, draft => {
+  .handleAction(clearRestaurant, (state) =>
+    produce(state, (draft) => {
       delete draft.currentItem;
-      delete draft.currentId;
+      delete draft.hoverId;
     }),
   );
 

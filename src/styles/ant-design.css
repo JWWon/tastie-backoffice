@@ -44,3 +44,19 @@ ul.ant-pagination li.ant-pagination-simple-pager {
 
   flex: 1;
 }
+
+.ant-upload-list-picture-card .ant-upload-list-item {
+  padding: 0;
+}
+
+.ant-modal-body {
+  padding: 0;
+}
+
+.ant-modal-content .ant-modal-close-x {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ant-modal-content svg {
+  fill: white;
+}

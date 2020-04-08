@@ -11,10 +11,10 @@ import {
 import Status from '@components/atoms/Status';
 import * as s from './RestaurantItem.style';
 
-const RestaurantItem: React.FC<RestaurantShort> = data => {
+const RestaurantItem: React.FC<RestaurantShort> = (data) => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState<boolean>(false);
-  const {currentId} = useSelector((state: RootState) => state.restaurants);
+  const {hoverId} = useSelector((state: RootState) => state.restaurants);
 
   function handleMouseEnter() {
     dispatch(setCurrentId(data.id));
@@ -25,12 +25,12 @@ const RestaurantItem: React.FC<RestaurantShort> = data => {
   }
 
   function handleClick() {
-    dispatch(getRestaurant.request());
+    dispatch(getRestaurant.request(data.id));
   }
 
   useEffect(() => {
-    setSelected(data.id === currentId);
-  }, [data.id, currentId]);
+    setSelected(data.id === hoverId);
+  }, [data.id, hoverId]);
 
   return (
     <s.Wrapper

@@ -1,6 +1,6 @@
 export interface Props {
   name: string;
   label: string;
-  placeholer?: string;
-  defaultValue?: string | number;
+  placeholder?: string;
+  defaultValue?: string[];
 }

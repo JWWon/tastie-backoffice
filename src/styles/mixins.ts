@@ -13,3 +13,8 @@ export const floatBox = css`
   border-radius: 0.25rem;
   box-shadow: 0px 2px 4px 2px ${({theme}) => theme.color.black.dim};
 `;
+
+export const inputBorder = css`
+  border: 1px solid ${({theme}) => theme.color.gray.light};
+  border-radius: 4px;
+`;

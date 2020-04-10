@@ -28,7 +28,7 @@ const mapUrlsToFileList = (urls: string[]): UploadFile[] =>
     return {
       url,
       uid: `-${number.toString()}`,
-      name: `photo_${number}`,
+      name: `uploaded_photo_${number}`,
       type: imageType,
       status: 'done',
       size: 0,

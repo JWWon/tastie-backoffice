@@ -15,6 +15,11 @@ export const AlignRight = styled.div`
   flex-direction: row;
 `;
 
+export const Form = styled.form`
+  padding: ${({theme}) => theme.space.rem.normal}rem;
+  flex: 1;
+`;
+
 // text
 export const Name = styled.h2`
   margin-left: ${({theme}) => theme.space.rem.normal}rem;

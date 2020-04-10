@@ -60,3 +60,12 @@ ul.ant-pagination li.ant-pagination-simple-pager {
 .ant-modal-content svg {
   fill: white;
 }
+
+.ant-form-item div {
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.ant-form-item .ant-form-item-control-input {
+  flex: 1;
+}

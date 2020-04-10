@@ -1,25 +1,22 @@
 import React from 'react';
-import {useForm, Controller} from 'react-hook-form';
-import {Form, Input} from 'antd';
 
+import * as s from './TextInput.style';
 import {Props} from './TextInput.type';
 
-function TextInput<T>({name, label, onSubmit}: Props<T>) {
-  const {handleSubmit, control} = useForm<T>();
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        as={
-          <Form.Item name={name} label={label}>
-            <Input name={name} />
-          </Form.Item>
-        }
-        control={control}
-        name={name}
-      />
-    </form>
-  );
-}
+const TextInput: React.FC<Props> = ({
+  name,
+  label,
+  placeholer,
+  defaultValue,
+}) => (
+  <s.Item name={name} label={label}>
+    <s.Input
+      name={name}
+      key={defaultValue}
+      placeholder={placeholer}
+      defaultValue={defaultValue}
+    />
+  </s.Item>
+);
 
 export default TextInput;

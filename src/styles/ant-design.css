@@ -61,6 +61,8 @@ ul.ant-pagination li.ant-pagination-simple-pager {
   fill: white;
 }
 
+.ant-select-selector,
+.ant-select-item-option,
 .ant-form-item div {
   -ms-flex-direction: row;
   flex-direction: row;

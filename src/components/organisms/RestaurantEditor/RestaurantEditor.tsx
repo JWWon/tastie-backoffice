@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
 
@@ -11,30 +12,38 @@ import TextInput from '@components/atoms/TextInput';
 import {Props as RawTextProps} from '@components/atoms/TextInput/TextInput.type';
 import * as s from './RestaurantEditor.style';
 import {Row, Col} from 'antd';
+import SelectInput from '@components/atoms/SelectInput';
 
 interface TextProps extends RawTextProps {
   fullsize?: boolean;
 }
 
+const NAME = {
+  NAME: 'name' as const,
+  ADDRESS: 'address' as const,
+  TELEPHONE: 'telephone' as const,
+  CATEGORIES: 'categories' as const,
+};
+
 const RestaurantEditor: React.FC = () => {
   const dispatch = useDispatch();
-  const {handleSubmit, control} = useForm();
   const item = useSelector((state: RootState) => state.restaurants.currentItem);
+  const {control, handleSubmit, setValue, register, reset} = useForm();
 
   const texts: TextProps[] = [
     {
       label: '이름',
-      name: 'name',
+      name: NAME.NAME,
       defaultValue: item?.name,
     },
     {
       label: '주소',
-      name: 'address',
+      name: NAME.ADDRESS,
       defaultValue: item?.address,
     },
     {
       label: '연락처',
-      name: 'telephone',
+      name: NAME.TELEPHONE,
       defaultValue: item?.telephone,
     },
   ];
@@ -43,6 +52,33 @@ const RestaurantEditor: React.FC = () => {
     console.log(values);
   }
 
+  function renderStatus() {
+    switch (item?.status) {
+      case 'ACTIVE':
+        return (
+          <s.Button type="primary" danger>
+            등록 취소
+          </s.Button>
+        );
+      case 'WAITING_FOR_REVIEW':
+        return <s.Button type="primary">등록 승인</s.Button>;
+      case 'REMOVED':
+        return <s.Button type="primary">재등록</s.Button>;
+      default:
+        return null;
+    }
+  }
+
+  useEffect(() => register({name: NAME.CATEGORIES}), [register]);
+  useEffect(() => {
+    const defaultValue: {[key: string]: any} = {};
+    for (const key of Object.values(NAME)) {
+      defaultValue[key] = item ? item[key] : undefined;
+    }
+
+    reset(defaultValue);
+  }, [item?.id]);
+
   return item ? (
     <Fullscreen>
       <s.Header>
@@ -50,17 +86,7 @@ const RestaurantEditor: React.FC = () => {
         <s.Name>{item.name}</s.Name>
         <s.Status status={item.status} showLabel />
         <s.AlignRight>
-          {item.status === 'WAITING_FOR_REVIEW' && (
-            <s.Button type="primary">등록 승인</s.Button>
-          )}
-          {item.status === 'ACTIVE' && (
-            <s.Button type="primary" danger>
-              등록 취소
-            </s.Button>
-          )}
-          {item.status === 'REMOVED' && (
-            <s.Button type="primary">재등록</s.Button>
-          )}
+          {renderStatus()}
           <s.Button onClick={handleSubmit(onSubmit)}>업데이트</s.Button>
         </s.AlignRight>
       </s.Header>
@@ -70,6 +96,7 @@ const RestaurantEditor: React.FC = () => {
         <Row gutter={[24, 16]}>
           {texts.map((text) => (
             <Controller
+              key={text.name}
               as={
                 <Col span={text.fullsize ? 24 : 12}>
                   <TextInput {...text} />
@@ -81,6 +108,14 @@ const RestaurantEditor: React.FC = () => {
               defaultValue={{value: text.defaultValue}}
             />
           ))}
+          <Col span={24}>
+            <SelectInput
+              label="카테고리"
+              name={NAME.CATEGORIES}
+              defaultValue={item?.categories}
+              onChange={(value) => setValue(NAME.CATEGORIES, value)}
+            />
+          </Col>
         </Row>
       </s.Form>
     </Fullscreen>

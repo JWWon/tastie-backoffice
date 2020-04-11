@@ -1,6 +1,6 @@
-export interface Props {
+import {SelectProps} from 'antd/lib/select';
+
+export interface Props extends SelectProps<string[]> {
   name: string;
   label: string;
-  placeholder?: string;
-  defaultValue?: string[];
 }

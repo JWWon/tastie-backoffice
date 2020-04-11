@@ -96,6 +96,7 @@ function* getRestaurantSaga(action: ReturnType<typeof getRestaurant.request>) {
           },
         },
       ],
+      description: 'this is restaurant',
     };
 
     yield put(getRestaurant.success(dummyData));

@@ -14,6 +14,7 @@ import SelectInput from '@components/atoms/SelectInput';
 import KeywordsInput from '@components/atoms/KeywordsInput';
 import {Props as RawTextProps} from '@components/atoms/TextInput/TextInput.type';
 import * as s from './RestaurantEditor.style';
+import TextAreaInput from '@components/atoms/TextAreaInput';
 
 interface TextProps extends RawTextProps {
   fullsize?: boolean;
@@ -25,6 +26,7 @@ const NAME = {
   TELEPHONE: 'telephone' as const,
   CATEGORIES: 'categories' as const,
   KEYWORDS: 'keywords' as const,
+  DESCRIPTION: 'description' as const,
 };
 
 const RestaurantEditor: React.FC = () => {
@@ -133,6 +135,22 @@ const RestaurantEditor: React.FC = () => {
               setValue={setValue}
             />
           </Col>
+          <Controller
+            key={NAME.DESCRIPTION}
+            as={
+              <Col span={24}>
+                <TextAreaInput
+                  label="맛집 설명"
+                  name={NAME.DESCRIPTION}
+                  defaultValue={item?.description}
+                />
+              </Col>
+            }
+            onChange={([selected]) => selected}
+            control={control}
+            name={NAME.DESCRIPTION}
+            defaultValue={{value: item?.description}}
+          />
         </Row>
       </s.Form>
     </Fullscreen>

@@ -62,5 +62,6 @@ declare module '@model' {
       latitude: number;
       longitude: number;
     };
+    description: string;
   }
 }

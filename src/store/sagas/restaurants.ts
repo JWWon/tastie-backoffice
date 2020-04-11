@@ -41,16 +41,30 @@ function* getRestaurantSaga(action: ReturnType<typeof getRestaurant.request>) {
       photoUrls: _.range(Math.floor(Math.random() * 5) + 5).map(
         () => 'https://picsum.photos/200',
       ),
-      keywords: [
-        {
-          title: 'popular_topic',
-          tags: ['출타 제한', '맥도날드 신메뉴', '배고프다'],
+      keywords: {
+        popular_topic: {
+          label: '인기 토픽',
+          tags: _.range(Math.floor(Math.random() * 6)).map(
+            (idx) => `topic_${idx + 1}`,
+          ),
         },
-        {
-          title: 'atmosphere',
-          tags: ['우울한', '사진찍기 좋은'],
+        facility: {
+          label: '시설',
+          tags: _.range(Math.floor(Math.random() * 6)).map(
+            (idx) => `facility_${idx + 1}`,
+          ),
         },
-      ],
+        purpose: {
+          label: '방문 목적',
+          tags: [],
+        },
+        atmosphere: {
+          label: '분위기',
+          tags: _.range(Math.floor(Math.random() * 6)).map(
+            (idx) => `atmosphere_${idx + 1}`,
+          ),
+        },
+      },
       menus: [
         {
           popular: false,

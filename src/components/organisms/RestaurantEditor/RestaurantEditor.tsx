@@ -2,17 +2,18 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
+import {Row, Col} from 'antd';
 
 import {RootState} from '@store/reducers';
 import {clearRestaurant} from '@store/actions/restaurants';
 import Fullscreen from '@components/templates/Fullscreen';
-import Dismiss from '@components/atoms/Dismiss';
 import PhotoSlider from '@components/molcules/PhotoSlider';
+import Dismiss from '@components/atoms/Dismiss';
 import TextInput from '@components/atoms/TextInput';
+import SelectInput from '@components/atoms/SelectInput';
+import KeywordsInput from '@components/atoms/KeywordsInput';
 import {Props as RawTextProps} from '@components/atoms/TextInput/TextInput.type';
 import * as s from './RestaurantEditor.style';
-import {Row, Col} from 'antd';
-import SelectInput from '@components/atoms/SelectInput';
 
 interface TextProps extends RawTextProps {
   fullsize?: boolean;
@@ -23,12 +24,20 @@ const NAME = {
   ADDRESS: 'address' as const,
   TELEPHONE: 'telephone' as const,
   CATEGORIES: 'categories' as const,
+  KEYWORDS: 'keywords' as const,
 };
 
 const RestaurantEditor: React.FC = () => {
-  const dispatch = useDispatch();
   const item = useSelector((state: RootState) => state.restaurants.currentItem);
-  const {control, handleSubmit, setValue, register, reset} = useForm();
+  const dispatch = useDispatch();
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    register,
+    reset,
+    unregister,
+  } = useForm();
 
   const texts: TextProps[] = [
     {
@@ -69,13 +78,10 @@ const RestaurantEditor: React.FC = () => {
     }
   }
 
-  useEffect(() => register({name: NAME.CATEGORIES}), [register]);
   useEffect(() => {
     const defaultValue: {[key: string]: any} = {};
-    for (const key of Object.values(NAME)) {
+    for (const key of Object.values(NAME))
       defaultValue[key] = item ? item[key] : undefined;
-    }
-
     reset(defaultValue);
   }, [item?.id]);
 
@@ -110,10 +116,21 @@ const RestaurantEditor: React.FC = () => {
           ))}
           <Col span={24}>
             <SelectInput
+              register={register}
+              unregister={unregister}
               label="카테고리"
               name={NAME.CATEGORIES}
               defaultValue={item?.categories}
               onChange={(value) => setValue(NAME.CATEGORIES, value)}
+            />
+          </Col>
+          <Col span={24}>
+            <KeywordsInput
+              register={register}
+              unregister={unregister}
+              name={NAME.KEYWORDS}
+              defaultValues={item.keywords}
+              setValue={setValue}
             />
           </Col>
         </Row>

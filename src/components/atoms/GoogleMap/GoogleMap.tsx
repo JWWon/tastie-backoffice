@@ -34,6 +34,7 @@ class GoogleMap extends React.PureComponent<Props> {
       center: {lat: 37.555693, lng: 126.936632},
       zoom: 17,
       mapTypeControl: false,
+      fullscreenControl: false,
       zoomControl: false,
     });
     // callback

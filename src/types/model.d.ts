@@ -28,9 +28,23 @@ declare module '@model' {
     address: string;
     categories: string[];
     keywords: {
-      title: string; // '인기 토픽' | '시설' | '찾는 목적' | '분위기'
-      tags: string[];
-    }[];
+      popular_topic: {
+        label: '인기 토픽';
+        tags: string[];
+      };
+      facility: {
+        label: '시설';
+        tags: string[];
+      };
+      purpose: {
+        label: '방문 목적';
+        tags: string[];
+      };
+      atmosphere: {
+        label: '분위기';
+        tags: string[];
+      };
+    };
     menus: {
       popular: boolean;
       name: string;

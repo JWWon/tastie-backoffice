@@ -12,9 +12,10 @@ import Dismiss from '@components/atoms/Dismiss';
 import TextInput from '@components/atoms/TextInput';
 import SelectInput from '@components/atoms/SelectInput';
 import KeywordsInput from '@components/atoms/KeywordsInput';
+import TextAreaInput from '@components/atoms/TextAreaInput';
+import ListInput from '@components/molcules/ListInput';
 import {Props as RawTextProps} from '@components/atoms/TextInput/TextInput.type';
 import * as s from './RestaurantEditor.style';
-import TextAreaInput from '@components/atoms/TextAreaInput';
 
 interface TextProps extends RawTextProps {
   fullsize?: boolean;
@@ -26,6 +27,8 @@ const NAME = {
   TELEPHONE: 'telephone' as const,
   CATEGORIES: 'categories' as const,
   KEYWORDS: 'keywords' as const,
+  MENUS: 'menus' as const,
+  OPENING_HOURS: 'openingHours' as const,
   DESCRIPTION: 'description' as const,
 };
 
@@ -99,60 +102,80 @@ const RestaurantEditor: React.FC = () => {
         </s.AlignRight>
       </s.Header>
 
-      <PhotoSlider id={item.id} photoUrls={item.photoUrls} />
-      <s.Form onSubmit={handleSubmit(onSubmit)}>
-        <Row gutter={[24, 16]}>
-          {texts.map((text) => (
+      <s.Body>
+        <PhotoSlider id={item.id} photoUrls={item.photoUrls} />
+        <s.Form onSubmit={handleSubmit(onSubmit)}>
+          <Row gutter={[24, 16]}>
+            {texts.map((text) => (
+              <Controller
+                key={text.name}
+                as={
+                  <Col span={text.fullsize ? 24 : 12}>
+                    <TextInput {...text} />
+                  </Col>
+                }
+                onChange={([selected]) => selected}
+                control={control}
+                name={text.name}
+                defaultValue={{value: text.defaultValue}}
+              />
+            ))}
+            <Col span={24}>
+              <SelectInput
+                register={register}
+                unregister={unregister}
+                label="카테고리"
+                name={NAME.CATEGORIES}
+                defaultValue={item?.categories}
+                onChange={(value) => setValue(NAME.CATEGORIES, value)}
+              />
+            </Col>
+            <Col span={24}>
+              <KeywordsInput
+                register={register}
+                unregister={unregister}
+                name={NAME.KEYWORDS}
+                defaultValues={item.keywords}
+                setValue={setValue}
+              />
+            </Col>
             <Controller
-              key={text.name}
+              key={NAME.DESCRIPTION}
               as={
-                <Col span={text.fullsize ? 24 : 12}>
-                  <TextInput {...text} />
+                <Col span={24}>
+                  <TextAreaInput
+                    label="맛집 설명"
+                    name={NAME.DESCRIPTION}
+                    defaultValue={item?.description}
+                  />
                 </Col>
               }
               onChange={([selected]) => selected}
               control={control}
-              name={text.name}
-              defaultValue={{value: text.defaultValue}}
+              name={NAME.DESCRIPTION}
+              defaultValue={{value: item?.description}}
             />
-          ))}
-          <Col span={24}>
-            <SelectInput
-              register={register}
-              unregister={unregister}
-              label="카테고리"
-              name={NAME.CATEGORIES}
-              defaultValue={item?.categories}
-              onChange={(value) => setValue(NAME.CATEGORIES, value)}
-            />
-          </Col>
-          <Col span={24}>
-            <KeywordsInput
-              register={register}
-              unregister={unregister}
-              name={NAME.KEYWORDS}
-              defaultValues={item.keywords}
-              setValue={setValue}
-            />
-          </Col>
-          <Controller
-            key={NAME.DESCRIPTION}
-            as={
-              <Col span={24}>
-                <TextAreaInput
-                  label="맛집 설명"
-                  name={NAME.DESCRIPTION}
-                  defaultValue={item?.description}
-                />
-              </Col>
-            }
-            onChange={([selected]) => selected}
-            control={control}
-            name={NAME.DESCRIPTION}
-            defaultValue={{value: item?.description}}
-          />
-        </Row>
-      </s.Form>
+            <Col span={12}>
+              <ListInput
+                register={register}
+                unregister={unregister}
+                name={NAME.MENUS}
+                label="메뉴"
+                setValue={setValue}
+              />
+            </Col>
+            <Col span={12}>
+              <ListInput
+                register={register}
+                unregister={unregister}
+                name={NAME.OPENING_HOURS}
+                label="영업시간"
+                setValue={setValue}
+              />
+            </Col>
+          </Row>
+        </s.Form>
+      </s.Body>
     </Fullscreen>
   ) : null;
 };

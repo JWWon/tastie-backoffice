@@ -74,7 +74,7 @@ function* getRestaurantSaga(action: ReturnType<typeof getRestaurant.request>) {
         },
       ],
       telephone: '010-1111-2222',
-      opening_hours: [
+      openingHours: [
         {
           range: 'WEEKDAY',
           type: 'OPEN',

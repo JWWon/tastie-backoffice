@@ -52,7 +52,7 @@ declare module '@model' {
       currency: 'KRW' | 'USD';
     }[];
     telephone: string;
-    opening_hours: {
+    openingHours: {
       range: 'WEEKDAY' | 'WEEKEND' | 'HOLIDAY' | DAY; // 요일
       type: 'OPEN' | 'DAY_OFF';
       time?: Time;

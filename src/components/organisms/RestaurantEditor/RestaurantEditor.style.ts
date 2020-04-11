@@ -10,6 +10,11 @@ export const Header = styled.div`
   align-items: center;
 `;
 
+export const Body = styled.div`
+  flex: 1;
+  overflow-y: scroll;
+`;
+
 export const AlignRight = styled.div`
   margin-left: auto;
   flex-direction: row;

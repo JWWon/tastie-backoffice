@@ -1,4 +1,4 @@
-export interface Item {
+export interface MenuItem {
   key: string;
   name: string;
   disabled?: boolean;
@@ -6,5 +6,5 @@ export interface Item {
 
 export interface Props {
   total: number;
-  items: Item[];
+  items: MenuItem[];
 }

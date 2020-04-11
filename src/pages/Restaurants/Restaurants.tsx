@@ -9,15 +9,15 @@ import {getRestaurants, setCurrentRange} from '@store/actions/restaurants';
 import SideBar from '@components/templates/SideBar';
 import SearchInput from '@components/atoms/SearchInput';
 import RestaurantItem from '@components/molcules/RestaurantItem';
-import ListHeader from '@components/atoms/ListHeader';
-import {Item} from '@components/atoms/ListHeader/ListHeader.type';
+import SideBarHeader from '@components/atoms/SideBarHeader';
+import {MenuItem} from '@components/atoms/SideBarHeader/SideBarHeader.type';
 import * as s from './Restaurants.style';
 import Marker from '@components/atoms/Marker';
 import GoogleMap from '@components/atoms/GoogleMap';
 import RestaurantEditor from '@components/organisms/RestaurantEditor';
 
 const pageSize = 12;
-const menuItems: Item[] = [
+const menuItems: MenuItem[] = [
   {key: 'create', name: '신규 등록'},
   {key: 'selectAll', name: '전체 선택'},
   {key: 'approve', name: '등록 승인', disabled: true},
@@ -60,7 +60,7 @@ const Restaurants: React.FC = () => {
               pageSize,
               onChange: (page) => dispatch(setCurrentRange({page, pageSize})),
             }}
-            header={<ListHeader total={total} items={menuItems} />}
+            header={<SideBarHeader total={total} items={menuItems} />}
             dataSource={data}
             renderItem={(item) => <RestaurantItem {...item} />}
           />

@@ -16,4 +16,4 @@ const Status: React.FC<Props> = ({status, showLabel, ...options}) => (
   </s.Wrapper>
 );
 
-export default Status;
+export default React.memo(Status);

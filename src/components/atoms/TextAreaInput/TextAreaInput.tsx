@@ -11,4 +11,4 @@ const TextAreaInput: React.FC<Props> = ({label, ...props}) => (
   </div>
 );
 
-export default TextAreaInput;
+export default React.memo(TextAreaInput);

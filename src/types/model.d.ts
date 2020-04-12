@@ -7,6 +7,20 @@ declare module '@model' {
     end: string;
   }
 
+  export interface OpeningHour {
+    range: 'WEEKDAY' | 'WEEKEND' | 'HOLIDAY' | DAY; // 요일
+    type: 'OPEN' | 'DAY_OFF';
+    time?: Time;
+    breakTime?: Time;
+  }
+
+  export interface Menu {
+    popular: boolean;
+    name: string;
+    price: number;
+    currency: 'KRW' | 'USD';
+  }
+
   export interface RestaurantShort {
     id: string;
     photoUrl: string;
@@ -45,19 +59,9 @@ declare module '@model' {
         tags: string[];
       };
     };
-    menus: {
-      popular: boolean;
-      name: string;
-      price: number;
-      currency: 'KRW' | 'USD';
-    }[];
+    menus: Menu[];
     telephone: string;
-    openingHours: {
-      range: 'WEEKDAY' | 'WEEKEND' | 'HOLIDAY' | DAY; // 요일
-      type: 'OPEN' | 'DAY_OFF';
-      time?: Time;
-      breakTime?: Time;
-    }[];
+    openingHours: OpeningHour[];
     coordinate: {
       latitude: number;
       longitude: number;

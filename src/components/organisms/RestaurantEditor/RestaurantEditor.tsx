@@ -4,17 +4,20 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
 import {Row, Col} from 'antd';
 
+import {Menu, OpeningHour} from '@model';
 import {RootState} from '@store/reducers';
 import {clearRestaurant} from '@store/actions/restaurants';
 import Fullscreen from '@components/templates/Fullscreen';
 import PhotoSlider from '@components/molcules/PhotoSlider';
 import Dismiss from '@components/atoms/Dismiss';
-import TextInput from '@components/atoms/TextInput';
-import SelectInput from '@components/atoms/SelectInput';
-import KeywordsInput from '@components/atoms/KeywordsInput';
-import TextAreaInput from '@components/atoms/TextAreaInput';
+import TextInput from '@components/molcules/TextInput';
+import SelectInput from '@components/molcules/SelectInput';
+import KeywordsInput from '@components/molcules/KeywordsInput';
+import TextAreaInput from '@components/molcules/TextAreaInput';
 import ListInput from '@components/molcules/ListInput';
-import {Props as RawTextProps} from '@components/atoms/TextInput/TextInput.type';
+import MenuInputItem from '@components/atoms/MenuInputItem';
+import OpeningHourInputItem from '@components/atoms/OpeningHourInputItem';
+import {Props as RawTextProps} from '@components/molcules/TextInput/TextInput.type';
 import * as s from './RestaurantEditor.style';
 
 interface TextProps extends RawTextProps {
@@ -156,21 +159,25 @@ const RestaurantEditor: React.FC = () => {
               defaultValue={{value: item?.description}}
             />
             <Col span={12}>
-              <ListInput
+              <ListInput<Menu>
                 register={register}
                 unregister={unregister}
                 name={NAME.MENUS}
                 label="메뉴"
                 setValue={setValue}
+                renderItem={MenuInputItem}
+                defaultValues={item?.menus}
               />
             </Col>
             <Col span={12}>
-              <ListInput
+              <ListInput<OpeningHour>
                 register={register}
                 unregister={unregister}
                 name={NAME.OPENING_HOURS}
                 label="영업시간"
                 setValue={setValue}
+                renderItem={OpeningHourInputItem}
+                defaultValues={item?.openingHours}
               />
             </Col>
           </Row>

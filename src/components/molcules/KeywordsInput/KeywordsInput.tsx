@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Row, Col, Select} from 'antd';
 
+import FormItem from '@components/atoms/FormItem';
 import {Props} from './KeywordsInput.type';
 import * as s from './KeywordsInput.style';
 
@@ -20,8 +21,7 @@ const KeywordsInput: React.FC<Props> = ({
   }, [name, register, unregister]);
 
   return (
-    <div>
-      <s.Label>키워드</s.Label>
+    <FormItem label="키워드">
       <Row gutter={[0, 8]}>
         {(Object.keys(defaultValues) as Array<keyof typeof defaultValues>).map(
           (key) => {
@@ -45,7 +45,7 @@ const KeywordsInput: React.FC<Props> = ({
           },
         )}
       </Row>
-    </div>
+    </FormItem>
   );
 };
 

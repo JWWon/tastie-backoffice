@@ -1,14 +1,13 @@
 import React from 'react';
 import {Input} from 'antd';
 
-import * as s from './TextInput.style';
+import FormItem from '@components/atoms/FormItem';
 import {Props} from './TextInput.type';
 
 const TextInput: React.FC<Props> = ({label, ...props}) => (
-  <div>
-    <s.Label>{label}</s.Label>
+  <FormItem label={label}>
     <Input {...props} key={props.defaultValue} />
-  </div>
+  </FormItem>
 );
 
 export default React.memo(TextInput);

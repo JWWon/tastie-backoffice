@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {Select} from 'antd';
 
+import FormItem from '@components/atoms/FormItem';
 import {Props} from './SelectInput.type';
-import * as s from './SelectInput.style';
 
 const SelectInput: React.FC<Props> = ({
   register,
@@ -17,10 +17,9 @@ const SelectInput: React.FC<Props> = ({
   }, [name, register, unregister]);
 
   return (
-    <div>
-      <s.Label>{label}</s.Label>
+    <FormItem label={label}>
       <Select {...props} key={props.defaultValue?.join(',')} mode="tags" />
-    </div>
+    </FormItem>
   );
 };
 

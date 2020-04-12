@@ -166,6 +166,12 @@ const RestaurantEditor: React.FC = () => {
                 label="메뉴"
                 setValue={setValue}
                 renderItem={MenuInputItem}
+                emptyItem={{
+                  popular: false,
+                  name: '',
+                  price: 0,
+                  currency: 'KRW',
+                }}
                 defaultValues={item?.menus}
               />
             </Col>
@@ -177,6 +183,7 @@ const RestaurantEditor: React.FC = () => {
                 label="영업시간"
                 setValue={setValue}
                 renderItem={OpeningHourInputItem}
+                emptyItem={{range: 'WEEKDAY', type: 'OPEN'}}
                 defaultValues={item?.openingHours}
               />
             </Col>

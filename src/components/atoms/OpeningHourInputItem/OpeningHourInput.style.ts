@@ -30,7 +30,13 @@ export const InputText = styled(Input).attrs({
 export const InputDivider = styled(Input).attrs({
   placeholder: '~',
   disabled: true,
-  style: {width: '9.96%', borderLeft: 0, borderRight: 0, pointerEvents: 'none'},
+  style: {
+    width: '9.96%',
+    borderLeft: 0,
+    borderRight: 0,
+    pointerEvents: 'none',
+    background: 'white',
+  },
 })``;
 
 export const DeleteIcon = styled(DeleteOutlined)`

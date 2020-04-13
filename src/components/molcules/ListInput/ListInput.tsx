@@ -30,6 +30,13 @@ function ListInput<T>({
     setData(nextData);
   }
 
+  function handleRemove(index: number) {
+    let nextData = [...data];
+    nextData.splice(index, 1);
+    setPureValue(name, nextData);
+    setData(nextData);
+  }
+
   const setPureValue = (name: string, value: ItemProps<T>[]) =>
     setValue(
       name,
@@ -37,7 +44,12 @@ function ListInput<T>({
     );
 
   const renderItemWithProps = (item: T, index: number) =>
-    renderItem({...item, index, onChange: handleChange});
+    renderItem({
+      ...item,
+      index,
+      onChange: handleChange,
+      onRemove: handleRemove,
+    });
 
   useEffect(() => {
     register({name});

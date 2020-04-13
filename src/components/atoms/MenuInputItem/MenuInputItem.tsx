@@ -18,6 +18,12 @@ const MenuInputItem: React.FC<ItemProps<Menu>> = (props) => {
       props.onChange(nextItem, props.index);
   }
 
+  function handleRemove() {
+    if (props.onRemove && props.index !== undefined) {
+      props.onRemove(props.index);
+    }
+  }
+
   return (
     <Fragment key={props.index?.toString()}>
       <Col span={2}>
@@ -37,7 +43,7 @@ const MenuInputItem: React.FC<ItemProps<Menu>> = (props) => {
         <Input.Group compact>
           <Input
             value={props.price}
-            onChange={(e) => handleUpdate('price', e.target.value)}
+            onChange={(e) => handleUpdate('price', parseInt(e.target.value))}
             style={{width: '60%'}}
           />
           <Select
@@ -53,7 +59,7 @@ const MenuInputItem: React.FC<ItemProps<Menu>> = (props) => {
         </Input.Group>
       </Col>
       <Col span={1}>
-        <s.DeleteIcon />
+        <s.DeleteIcon onClick={handleRemove} />
       </Col>
     </Fragment>
   );

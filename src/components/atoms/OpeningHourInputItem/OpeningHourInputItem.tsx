@@ -34,6 +34,12 @@ const OpeningHourInputItem: React.FC<ItemProps<OpeningHour>> = (props) => {
       props.onChange(nextItem, props.index);
   }
 
+  function handleRemove() {
+    if (props.onRemove && props.index !== undefined) {
+      props.onRemove(props.index);
+    }
+  }
+
   function handleBreakTime(activate: boolean) {
     let nextItem: OpeningHour = cloneDeep(props);
     if (activate) nextItem.breakTime = {start: '', end: ''};
@@ -85,7 +91,7 @@ const OpeningHourInputItem: React.FC<ItemProps<OpeningHour>> = (props) => {
         </Input.Group>
       </Col>
       <Col span={1}>
-        <s.DeleteIcon />
+        <s.DeleteIcon onClick={handleRemove} />
       </Col>
       {props.type === 'OPEN' && (
         <>

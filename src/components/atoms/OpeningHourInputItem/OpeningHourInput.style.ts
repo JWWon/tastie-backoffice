@@ -11,13 +11,17 @@ export const Divider = styled.div`
   justify-content: center;
 `;
 
+export const BreakTime = styled.h4`
+  color: ${({theme}) => theme.color.gray.dark};
+`;
+
 // custom
 export const SelectRange = styled(Select)`
   width: 100%;
 `;
 
 export const InputText = styled(Input).attrs({
-  style: {width: '45%', textAlign: 'center'},
+  style: {width: '42%', textAlign: 'center'},
 })`
   &:first-child {
     border-right: 0;
@@ -31,7 +35,7 @@ export const InputDivider = styled(Input).attrs({
   placeholder: '~',
   disabled: true,
   style: {
-    width: '9.96%',
+    width: '15.96%',
     borderLeft: 0,
     borderRight: 0,
     pointerEvents: 'none',

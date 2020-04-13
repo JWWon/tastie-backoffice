@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import cloneDeep from 'lodash/cloneDeep';
+import dot from 'dot-object';
 import {Col, Input, Select} from 'antd';
 
 import {Menu} from '@model';
+import TextSwitch from '@components/atoms/TextSwitch';
 import {ItemProps} from '@components/molcules/ListInput/ListInput.type';
 import * as s from './MenuInputItem.style';
 
@@ -9,18 +12,21 @@ const MONEY = ['KRW', 'USD'];
 
 const MenuInputItem: React.FC<ItemProps<Menu>> = (props) => {
   function handleUpdate(key: string, value: any) {
-    const nextItem: Menu = {...props, [key]: value};
-    if (props.onChange && typeof props.index === 'number') {
+    const nextItem: Menu = cloneDeep(props);
+    dot.str(key, value, nextItem);
+    if (props.onChange && props.index !== undefined)
       props.onChange(nextItem, props.index);
-    }
   }
 
   return (
-    <>
-      <Col span={1}>
-        <s.DeleteIcon />
+    <Fragment key={props.index?.toString()}>
+      <Col span={2}>
+        <TextSwitch
+          message="추천"
+          value={props.popular}
+          onChange={(value) => handleUpdate('popular', value)}
+        />
       </Col>
-      <Col span={2}>추천</Col>
       <Col span={10}>
         <Input
           value={props.name}
@@ -46,7 +52,10 @@ const MenuInputItem: React.FC<ItemProps<Menu>> = (props) => {
           </Select>
         </Input.Group>
       </Col>
-    </>
+      <Col span={1}>
+        <s.DeleteIcon />
+      </Col>
+    </Fragment>
   );
 };
 

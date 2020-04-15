@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {ClickParam} from 'antd/lib/menu';
 import _ from 'lodash';
 
 import {RestaurantShort} from '@model';
 import {RootState} from '@store/reducers';
-import {getRestaurants, setCurrentRange} from '@store/actions/restaurants';
+import {
+  getRestaurants,
+  setCurrentRange,
+  openEmptyRestaurant,
+} from '@store/actions/restaurants';
 import SideBar from '@components/templates/SideBar';
 import SearchInput from '@components/atoms/SearchInput';
 import RestaurantItem from '@components/molcules/RestaurantItem';
@@ -33,11 +38,19 @@ const Restaurants: React.FC = () => {
   // useDispatch
   const dispatch = useDispatch();
   // useSelector
-  const {data, currentRange} = useSelector(
+  const {data, selectedIds, currentRange} = useSelector(
     (state: RootState) => state.restaurants,
   );
 
   const total = data.length;
+
+  function handleClickMenu(param: ClickParam) {
+    switch (param.key) {
+      case 'create':
+        dispatch(openEmptyRestaurant());
+        break;
+    }
+  }
 
   useEffect(() => {
     dispatch(getRestaurants.request());
@@ -60,7 +73,14 @@ const Restaurants: React.FC = () => {
               pageSize,
               onChange: (page) => dispatch(setCurrentRange({page, pageSize})),
             }}
-            header={<SideBarHeader total={total} items={menuItems} />}
+            header={
+              <SideBarHeader
+                total={total}
+                items={menuItems}
+                selected={selectedIds.length}
+                onClick={handleClickMenu}
+              />
+            }
             dataSource={data}
             renderItem={(item) => <RestaurantItem {...item} />}
           />

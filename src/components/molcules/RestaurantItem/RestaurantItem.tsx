@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import includes from 'lodash/includes';
 
 import {RestaurantShort} from '@model';
 import {RootState} from '@store/reducers';
@@ -7,14 +8,19 @@ import {
   setCurrentId,
   clearCurrentId,
   getRestaurant,
+  removeSelectedId,
+  setSelectedId,
 } from '@store/actions/restaurants';
 import Status from '@components/atoms/Status';
 import * as s from './RestaurantItem.style';
 
 const RestaurantItem: React.FC<RestaurantShort> = (data) => {
   const dispatch = useDispatch();
+  const [hover, setHover] = useState<boolean>(false);
   const [selected, setSelected] = useState<boolean>(false);
-  const {hoverId} = useSelector((state: RootState) => state.restaurants);
+  const {hoverId, selectedIds} = useSelector(
+    (state: RootState) => state.restaurants,
+  );
 
   function handleMouseEnter() {
     dispatch(setCurrentId(data.id));
@@ -28,17 +34,31 @@ const RestaurantItem: React.FC<RestaurantShort> = (data) => {
     dispatch(getRestaurant.request(data.id));
   }
 
-  useEffect(() => {
-    setSelected(data.id === hoverId);
-  }, [data.id, hoverId]);
+  function handleSelect(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.stopPropagation();
+    if (selected) dispatch(removeSelectedId(data.id));
+    else dispatch(setSelectedId(data.id));
+  }
+
+  useEffect(() => setHover(data.id === hoverId), [data.id, hoverId]);
+  useEffect(() => setSelected(includes(selectedIds, data.id)), [
+    data.id,
+    selectedIds,
+  ]);
 
   return (
     <s.Wrapper
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      selected={selected}>
-      <s.Thumbnail src={data.photoUrl} />
+      selected={selected || hover}>
+      <s.Thumbnail src={data.photoUrl} onClick={handleSelect}>
+        {selected && (
+          <s.Selected>
+            <s.CheckIcon />
+          </s.Selected>
+        )}
+      </s.Thumbnail>
       <s.Content>
         <s.ContentRow>
           <Status status={data.status} />

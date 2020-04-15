@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {CheckOutlined} from '@ant-design/icons';
 
 import {Restaurant} from '@model';
 import {hover} from '@styles/mixins';
@@ -40,6 +41,25 @@ export const Status = styled.div<Pick<Restaurant, 'status'>>`
       : theme.color.red};
 `;
 
+interface ThumbnailProps {
+  src: string;
+}
+const size = 48;
+export const Thumbnail = styled.div<ThumbnailProps>`
+  width: ${size}px;
+  height: ${size}px;
+  margin-right: 0.75rem;
+  background: ${({theme, src}) =>
+    `${theme.color.gray.light} url("${src}") no-repeat center center`};
+`;
+
+export const Selected = styled.div`
+  flex: 1;
+  background: ${({theme}) => theme.color.gray.dim};
+  align-items: center;
+  justify-content: center;
+`;
+
 // text
 export const Name = styled.h5``;
 
@@ -49,11 +69,9 @@ export const Info = styled.p`
   white-space: nowrap;
 `;
 
-// img
-const size = 48;
-export const Thumbnail = styled.img`
-  width: ${size}px;
-  height: ${size}px;
-  object-fit: cover;
-  margin-right: 0.75rem;
+// custom
+export const CheckIcon = styled(CheckOutlined)`
+  font-size: 20px;
+  object-fit: contain;
+  color: white;
 `;

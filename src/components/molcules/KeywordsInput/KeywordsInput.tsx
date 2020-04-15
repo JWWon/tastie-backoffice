@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, Fragment} from 'react';
 import {Row, Col, Select} from 'antd';
 
 import FormItem from '@components/atoms/FormItem';
@@ -27,7 +27,7 @@ const KeywordsInput: React.FC<Props> = ({
           (key) => {
             const {label, tags} = defaultValues[key];
             return (
-              <>
+              <Fragment key={label}>
                 <Col span={2}>
                   <s.ValueLabel>{label}</s.ValueLabel>
                 </Col>
@@ -40,7 +40,7 @@ const KeywordsInput: React.FC<Props> = ({
                     mode="tags"
                   />
                 </Col>
-              </>
+              </Fragment>
             );
           },
         )}

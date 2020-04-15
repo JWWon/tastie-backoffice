@@ -70,6 +70,7 @@ const RestaurantEditor: React.FC = () => {
   }
 
   function renderStatus() {
+    if (!item?.id) return null;
     switch (item?.status) {
       case 'ACTIVE':
         return (
@@ -101,7 +102,9 @@ const RestaurantEditor: React.FC = () => {
         <s.Status status={item.status} showLabel />
         <s.AlignRight>
           {renderStatus()}
-          <s.Button onClick={handleSubmit(onSubmit)}>업데이트</s.Button>
+          <s.Button onClick={handleSubmit(onSubmit)}>
+            {item.id ? '업데이트' : '신규등록'}
+          </s.Button>
         </s.AlignRight>
       </s.Header>
 
@@ -129,7 +132,7 @@ const RestaurantEditor: React.FC = () => {
                 unregister={unregister}
                 label="카테고리"
                 name={NAME.CATEGORIES}
-                defaultValue={item?.categories}
+                defaultValue={item.categories}
                 onChange={(value) => setValue(NAME.CATEGORIES, value)}
               />
             </Col>
@@ -149,14 +152,14 @@ const RestaurantEditor: React.FC = () => {
                   <TextAreaInput
                     label="맛집 설명"
                     name={NAME.DESCRIPTION}
-                    defaultValue={item?.description}
+                    defaultValue={item.description}
                   />
                 </Col>
               }
               onChange={([selected]) => selected}
               control={control}
               name={NAME.DESCRIPTION}
-              defaultValue={{value: item?.description}}
+              defaultValue={{value: item.description}}
             />
             <Col span={12}>
               <ListInput<Menu>
@@ -172,7 +175,7 @@ const RestaurantEditor: React.FC = () => {
                   price: 0,
                   currency: 'KRW',
                 }}
-                defaultValues={item?.menus}
+                defaultValues={item.menus}
               />
             </Col>
             <Col span={12}>
@@ -184,7 +187,7 @@ const RestaurantEditor: React.FC = () => {
                 setValue={setValue}
                 renderItem={OpeningHourInputItem}
                 emptyItem={{range: 'WEEKDAY', type: 'OPEN'}}
-                defaultValues={item?.openingHours}
+                defaultValues={item.openingHours}
               />
             </Col>
           </Row>

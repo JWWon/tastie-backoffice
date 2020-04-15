@@ -10,6 +10,7 @@ export default {
   gray: {
     light: '#DBDBDB' as const,
     dark: '#545454' as const,
+    dim: 'rgba(84, 84, 84, 0.75)' as const,
   },
   blue: '#1972F8' as const,
   green: '#16FF54' as const,

@@ -41,6 +41,24 @@ export const CLEAR_CURRENT_ID = '@restaurants/CLEAR_CURRENT_ID';
 export const clearCurrentId = createAction(CLEAR_CURRENT_ID)();
 // END CLEAR_CURRENT_ID
 
+// SET_SELECTED_ID
+export const SET_SELECTED_ID = '@restaurants/SET_SELECTED_ID';
+
+export const setSelectedId = createAction(
+  SET_SELECTED_ID,
+  (payload: string) => payload,
+)();
+// END SET_SELECTED_ID
+
+// REMOVE_SELECTED_ID
+export const REMOVE_SELECTED_ID = '@restaurants/REMOVE_SELECTED_ID';
+
+export const removeSelectedId = createAction(
+  REMOVE_SELECTED_ID,
+  (payload: string) => payload,
+)();
+// END REMOVE_SELECTED_ID
+
 // SET_CURRENT_RANGE
 interface SetCurrentPage {
   page: number;
@@ -53,6 +71,12 @@ export const setCurrentRange = createAction(
   (payload: SetCurrentPage) => payload,
 )();
 // END SET_CURRENT_RANGE
+
+// OPEN_EMPTY_RESTAURANT
+export const OPEN_EMPTY_RESTAURANT = '@restaurants/OPEN_EMPTY_RESTAURANT';
+
+export const openEmptyRestaurant = createAction(OPEN_EMPTY_RESTAURANT)();
+// END OPEN_EMPTY_RESTAURANT
 
 // CLEAR_RESTAURANT
 export const CLEAR_RESTAURANT = '@restaurants/CLEAR_RESTAURANT';
@@ -67,7 +91,10 @@ const actions = {
   // sync
   setCurrentId,
   clearCurrentId,
+  setSelectedId,
+  removeSelectedId,
   setCurrentRange,
+  openEmptyRestaurant,
   clearRestaurant,
 };
 
